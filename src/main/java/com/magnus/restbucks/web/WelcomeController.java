@@ -25,11 +25,6 @@ public class WelcomeController {
     Link nextLink =
         LinkBuilder.newInstance().setRelationship(Link.RELATIONSHIP_NEXT).setHref("/1").build();
 
-    // Create a new Entity
-    // Entity result =
-    // EntityBuilder.newInstance().setComponentClass("test").addProperty("foo", "hello")
-    // .addProperty("number", 1).addLink(selfLink).build();
-
     List<Link> links = new ArrayList<Link>();
     links.add(selfLink);
     links.add(nextLink);
