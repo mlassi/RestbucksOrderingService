@@ -1,7 +1,10 @@
 package com.magnus.restbucks.web;
+
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,17 +21,23 @@ public class WelcomeControllerTest {
 
   @InjectMocks
   private WelcomeController welcomeController;
-  
+
   private MockMvc mockMvc;
-  
+
   @Before
   public void setup() {
     MockitoAnnotations.initMocks(this);
     mockMvc = MockMvcBuilders.standaloneSetup(welcomeController).build();
   }
-  
+
   @Test
   public void givenRootUrl_thenReturnStatusOK() throws Exception {
     mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk());
+  }
+
+  @Test
+  public void givenRootUrl_thenReturnLinkToSelf() throws Exception {
+    mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+        .andExpect(jsonPath("$.links[0].rel[0].", is("self")));
   }
 }
