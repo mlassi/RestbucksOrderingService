@@ -4,9 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
+import com.magnus.restbucks.config.ApplicationContext;
 
 @Configuration
-@ComponentScan
+@ComponentScan("com.magnus")
+@Import({ApplicationContext.class})
 @EnableAutoConfiguration
 public class Application {
 
